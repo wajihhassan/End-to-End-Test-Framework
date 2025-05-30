@@ -77,7 +77,7 @@ export class DeliveryDetails {
         await this.savedContainerCityName.waitFor({ state: 'visible' })
         expect(await this.savedContainerCityName.innerText()).toBe(await this.cityInput.inputValue())
 
-        await this.page.pause()
+        //await this.page.pause()
     }
 
 }
