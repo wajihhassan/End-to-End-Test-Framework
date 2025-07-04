@@ -3,7 +3,7 @@ import { MyAccountPage } from "../page/MyAccountPage.js"
 import { getLoginToken } from "../api-calls/getLoginToken.js"
 import { adminDetails } from "../Data/userDetails.js"
 
-test.only('Cookie injection test', async({ page }) => {
+test('Cookie injection test', async({ page }) => {
     
     //console.log(adminDetails.username)
     const loginToken = await getLoginToken( adminDetails.username, adminDetails.password )
