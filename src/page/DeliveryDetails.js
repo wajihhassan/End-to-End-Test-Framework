@@ -22,6 +22,7 @@ export class DeliveryDetails {
         this.savedContainerPostCode = page.locator ('[data-qa="saved-address-postcode"]')
         this.savedContainerCityName = page.locator ('[data-qa="saved-address-city"]')
         this.savedContainerCountryName = page.locator ('[data-qa="saved-address-country"]')
+        this.countinueToPaymentButton = page.getByRole ( 'button', { name: 'continue to payment' })
     }
         
     async fillDeliveryDetails (userAddress) {
@@ -78,6 +79,12 @@ export class DeliveryDetails {
         expect(await this.savedContainerCityName.innerText()).toBe(await this.cityInput.inputValue())
 
         //await this.page.pause()
+    }
+
+    async continueToPayment () {
+        await this.continueToPaymentButton.waitFor({ state: 'visible' })
+        await this.continueToPaymentButton.click()
+        await this.page.waitForURL(/\/payment/ , { timeout:3000})
     }
 
 }

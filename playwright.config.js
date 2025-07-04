@@ -13,8 +13,15 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+
+  //Timeout
+  timeout: 10*1000, // 5seconds
   testDir: './src/tests',
   /* Run tests in files in parallel */
+  
+  //Global Setup
+  globalSetup: require.resolve('./src/global-setup.js'),
+
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: false,
@@ -28,7 +35,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
        baseURL: 'http://localhost:2221',
-       headless: true,
+       headless: false,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -37,8 +44,8 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+     name: 'chromium',
+     use: { ...devices['Desktop Chrome'] },
     },
 
     /*{
@@ -52,10 +59,10 @@ export default defineConfig({
     },*/
 
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
+     {
+        name: 'Mobile Chrome',
+        use: { ...devices['Pixel 5'] },
+     },
     // {
     //   name: 'Mobile Safari',
     //   use: { ...devices['iPhone 12'] },

@@ -7,6 +7,8 @@ import { LoginPage } from "../page/LoginPage.js"
 import { SignupPage } from "../page/SignupPage.js"
 import { DeliveryDetails } from "../page/DeliveryDetails.js"
 import { deliveryDetails as userAddress } from "../Data/deliveryDetails.js"
+import { PaymentPage } from "../page/PaymentPage.js"
+import { paymentDetails as userPaymentDetails } from "../Data/paymentDetails.js"
 
 test('End to end user journey',async ({page})=>{
 
@@ -35,6 +37,12 @@ test('End to end user journey',async ({page})=>{
     const deliveryDetail = new DeliveryDetails(page)
     await deliveryDetail.fillDeliveryDetails(userAddress)
     await deliveryDetail.saveDetails()
+    await deliveryDetail.continueToPayment()
+
+    const paymentPage = new PaymentPage(page)
+    await paymentPage.activateDiscount()
+    await paymentPage.fillPaymentDetails(userPaymentDetails)
+    await paymentPage.pay()
 
 
     await page.pause()
