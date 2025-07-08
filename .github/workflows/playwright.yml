@@ -1,15 +1,13 @@
-#Pipeline Name
-name: Playwright Tests 
-# when does this run
+name: Playwright Tests
 on:
   push:
-    branches: [ main ] # after git push run on these branches
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
-jobs: #will run jobs
-  playwrighttests:
+    branches: [ main, master ]
+jobs:
+  test:
     timeout-minutes: 60
-    runs-on: ubuntu-latest # run on this OS
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -19,8 +17,6 @@ jobs: #will run jobs
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Initiate web server
-      run: chmod +x ./shopping-store-linux-amd64 &
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
