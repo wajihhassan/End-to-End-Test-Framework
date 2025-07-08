@@ -11,11 +11,9 @@ jobs: #will run jobs
     #timeout-minutes: 60
     runs-on: ubuntu-latest # run on this OS
     steps: # step list of things you wanna do
-    - name: Checkout Repository
-      # This step checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
-      # For more information, see: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#checkout
-    - uses: actions/checkout@v2
-    - name: Say hello
-      run: echo "Hello, world!"
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Say hello
+        run: echo "Hello, world!"
 
     
