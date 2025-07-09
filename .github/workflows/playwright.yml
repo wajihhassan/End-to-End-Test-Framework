@@ -13,8 +13,12 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Set up WebApp
+    - name: Make WebApp executable
       run: chmod +x ./shopping-store-linux-amd64 &
+    - name: Start webapp in background
+      run: |
+        nohup ./shopping-store-linux-amd64 > webapp.log 2>&1 &
+        sleep 10
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
